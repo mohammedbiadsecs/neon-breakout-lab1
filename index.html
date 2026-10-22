@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#050816" />
+    <meta
+      name="description"
+      content="Neon Breakout — a fast, responsive arcade game built with HTML, CSS, and JavaScript."
+    />
+    <title>Neon Breakout</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar" aria-label="Game status">
+        <a class="brand" href="#" aria-label="Neon Breakout home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>NEON <strong>BREAKOUT</strong></span>
+        </a>
+
+        <div class="stats">
+          <div class="stat"><span>Score</span><strong id="score">000000</strong></div>
+          <div class="stat"><span>Level</span><strong id="level">01</strong></div>
+          <div class="stat"><span>Lives</span><strong id="lives" aria-label="3 lives">◆ ◆ ◆</strong></div>
+        </div>
+
+        <div class="header-actions">
+          <button class="icon-button" id="soundButton" type="button" aria-label="Mute sound" title="Mute sound">
+            <svg class="sound-on" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 9v6h4l5 4V5L8 9H4Zm12.5 3a4.5 4.5 0 0 0-2.1-3.8v7.6a4.5 4.5 0 0 0 2.1-3.8Zm-2.1-8v2.1a7 7 0 0 1 0 11.8V20a9.5 9.5 0 0 0 0-16Z" />
+            </svg>
+            <svg class="sound-off" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 9v6h4l5 4V5L8 9H4Zm11.6 0-1.4 1.4 1.6 1.6-1.6 1.6 1.4 1.4 1.6-1.6 1.6 1.6 1.4-1.4-1.6-1.6 1.6-1.6-1.4-1.4-1.6 1.6L15.6 9Z" />
+            </svg>
+          </button>
+          <button class="small-button" id="pauseButton" type="button">Pause</button>
+          <button class="small-button restart" id="restartButton" type="button">Restart</button>
+        </div>
+      </header>
+
+      <section class="game-frame" id="gameFrame" aria-label="Neon Breakout game">
+        <canvas id="gameCanvas" width="1000" height="650" tabindex="0" aria-label="Neon Breakout game canvas"></canvas>
+
+        <div class="scanlines" aria-hidden="true"></div>
+
+        <div class="overlay active" id="startOverlay">
+          <div class="overlay-panel intro-panel">
+            <div class="eyebrow">Arcade protocol ready</div>
+            <h1>NEON<br /><span>BREAKOUT</span></h1>
+            <p>Break the grid. Chain combos. Catch unstable power cores.</p>
+            <button class="primary-button" id="startButton" type="button">
+              <span>Start run</span><kbd>Space</kbd>
+            </button>
+            <div class="controls-hint">
+              <span><kbd>←</kbd><kbd>→</kbd> or <kbd>A</kbd><kbd>D</kbd> Move</span>
+              <span><kbd>P</kbd> Pause</span>
+              <span class="touch-hint">Drag to move</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="overlay" id="pauseOverlay">
+          <div class="overlay-panel compact-panel">
+            <div class="status-glyph">Ⅱ</div>
+            <div class="eyebrow">System suspended</div>
+            <h2>Paused</h2>
+            <button class="primary-button" id="resumeButton" type="button">Resume</button>
+            <button class="text-button" id="pauseRestartButton" type="button">Restart run</button>
+          </div>
+        </div>
+
+        <div class="overlay" id="gameOverOverlay">
+          <div class="overlay-panel compact-panel">
+            <div class="eyebrow" id="endEyebrow">Signal lost</div>
+            <h2 id="endTitle">Game Over</h2>
+            <div class="final-score">
+              <span>Final score</span>
+              <strong id="finalScore">000000</strong>
+            </div>
+            <p class="new-best" id="newBest" hidden>New personal best</p>
+            <button class="primary-button" id="playAgainButton" type="button">Play again</button>
+          </div>
+        </div>
+
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      </section>
+
+      <footer class="bottom-bar">
+        <div class="best-score">Personal best <strong id="bestScore">000000</strong></div>
+        <div class="power-legend" aria-label="Power-up legend">
+          <span><i class="power-dot cyan"></i>Wide</span>
+          <span><i class="power-dot magenta"></i>Multi</span>
+          <span><i class="power-dot lime"></i>Slow</span>
+          <span><i class="power-dot amber"></i>Shield</span>
+        </div>
+        <div class="combo-display" id="comboDisplay">Combo <strong>x1</strong></div>
+      </footer>
+
+      <div class="mobile-controls" aria-label="Touch controls">
+        <button id="mobileLeft" type="button" aria-label="Move paddle left">◀</button>
+        <button id="mobilePause" type="button" aria-label="Pause game">Ⅱ</button>
+        <button id="mobileRight" type="button" aria-label="Move paddle right">▶</button>
+      </div>
+    </main>
+
+    <noscript>Neon Breakout requires JavaScript to run.</noscript>
+    <script src="game.js"></script>
+  </body>
+</html>
